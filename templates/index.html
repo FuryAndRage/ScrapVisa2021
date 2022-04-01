@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        html{
+           scroll-behavior: smooth;
+        }
+        body{
+            background-image: url('https://source.unsplash.com/1600x900/?auckland');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+{% endblock css %}
+    
+{% block main %}
+    <div class="container " id="app">
+        <div class="row my-5 justify-content-center">
+            <div class="card my-5" style="background-color: rgba(240, 248, 255, 0.445);">
+                <div class="card-body">
+                    <div class="row mb-2 ">
+                        <div class="col-sm-12">
+                            <h1 class="m-0 text-center" >2021 Resident Visa</h1>
+                            <p class="text-center">Last update: {{context.last_update}}</p>
+                        </div> 
+                        
+                        <div class="row mt-5">
+                        <div class="col-lg-3 col-6 ">
+                            <div class="small-box shadow bg-info">
+                                <div class="inner">
+                                    <h3>{{context.total_applied}}</h3>
+                                    <p>Total applications received</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box shadow bg-success">
+                                <div class="inner">
+                                    <h3>{{context.total_approved}}</h3>
+                                    <p>Applications approved </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box shadow bg-warning">
+                                <div class="inner">
+                                    <h3>{{context.percent_aproved}}<sup style="font-size: 20px">%</sup></h3>
+                                    <p>Percentage of Approved Visas</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box shadow bg-danger">
+                                <div class="inner">
+                                    <h3>{{context.average_aproved}}</h3>
+                                    <p>Weekly Average Approved Visas</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row ">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box shadow bg-info">
+                                <div class="inner">
+                                    <h3>{{context.people_included}}</h3>
+                                    <p>Total of People Included</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box shadow bg-success">
+                                <div class="inner">
+                                    <h3>{{context.people_approved}}</h3>
+                                    <p>Total of People Approved</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box shadow bg-warning">
+                                <div class="inner">
+                                <h3>{{context.people_percent}}<sup style="font-size: 20px">%</sup></h3>
+                                <p>Percentage of People Approved </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box shadow bg-danger">
+                                <div class="inner">
+                                    <h3>{{context.people_average}}</h3>
+                                    <p>Weekly Average People Approved</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mt-5 justify-content-center">
+                    <div class="col-lg-6 col-12">
+                    <div class="small-box shadow bg-dark">
+                        <div class="inner">
+                            <h3 class="text-center">{{context.time_process_total}} <span style="font-size: 0.8em;">Years</span></h3>
+                            <p class="text-center">Estimated time to process all applications</p>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="row justify-content-center">
+                       <div class="col-12 text-center">
+                        <a href="#table" class="btn btn-large btn-light">
+                            <span class="fas fa-arrow-down"></span>
+                        </a href="#table">
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+       <div class="row my-5">
+          <div class="card my-5">
+              <div class="card-body">
+                <div class="table-responsive-xl" id="table">
+                    <table class="table">
+                        <thead class="bg-dark">
+                            <tr>
+                                <th class="text-center ">Date</th>
+                                <th class="text-center">Total applications received</th>
+                                <th class="text-center">Total number of people included</th>
+                                <th class="text-center" >Applications approved and visas issued</th>
+                                <th class="text-center">People approved and issued visas</th>
+                            </tr>
+                        </thead>
+                         <tbody>
+                             <tr v-for="(data, index) in visaData">
+                                 <td class="text-center" >[[data.date]] </td>
+                                 <td class="text-center">[[data.applications_received]] <span v-if="getArrows('applications_received',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span> </td>
+                                 <td class="text-center">[[data.total_people_included]] <span v-if="getArrows('total_people_included',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span> </td>
+                                 <td class="text-center">[[data.applications_approved]] <span v-if="getArrows('applications_approved',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span></td>
+                                 <td class="text-center">[[data.people_approved]] <span v-if="getArrows('people_approved',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span></td>
+                             </tr>
+                         </tbody>
+                    </table>
+                </div>
+                <p>*All data was collected from the <a href="https://www.immigration.govt.nz/new-zealand-visas/waiting-for-a-visa/how-long-it-takes-to-process-your-visa-application/2021-resident-visa-processing-times" target="_blank">New Zealand Immigration</a> website.</p>
+              </div>
+          </div>
+       </div>
+
+    </div>
+
+{% endblock main %}
+
+
+{% block js %}
+<script>
+    const BASE_URL = '//localhost:5000';
+    Vue.createApp({
+        delimiters:["[[","]]"],
+        data() {
+            return {
+                visaData:[]
+            }
+        },
+        methods:{
+            getTableData(){
+                axios.get(`${BASE_URL}/api`).then(response =>{
+                    this.visaData = response.data;
+                    
+                }).catch(error =>{
+                    console.log(error);
+                
+                })
+            },
+            getArrows(data, index){
+                
+                if(index < this.visaData.length - 1){
+                    console.log(this.visaData[index][data] +" > "+ this.visaData[index +1][data])
+                    console.log(index , index + 1)
+                    if(parseInt(this.visaData[index][data]) > parseInt(this.visaData[index + 1][data])){
+                            return true
+                    }
+                }
+               
+            }
+        },
+        mounted(){
+            this.getTableData();
+        }
+    }).mount('#app')
+  </script>
+{% endblock js %}
+    
+    
