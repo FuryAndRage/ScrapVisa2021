@@ -71,7 +71,7 @@ class Scraper:
             'people_percent' : self.people_aproved_percent,
             'people_average' : round(self.people_average_weekly,1),
 
-            'time_process_total': round(((self.total_received - self.approved )/ self.average_weekly_approved)/52,2),
+            'time_process_total': round(((self.total_received - self.approved )/ self.average_weekly_approved)/52,1),
             'last_update':last_update
         }
         # json_context.reverse()
