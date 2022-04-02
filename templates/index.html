@@ -178,10 +178,7 @@
                 })
             },
             getArrows(data, index){
-                
                 if(index < this.visaData.length - 1){
-                    console.log(this.visaData[index][data] +" > "+ this.visaData[index +1][data])
-                    console.log(index , index + 1)
                     if(parseInt(this.visaData[index][data]) > parseInt(this.visaData[index + 1][data])){
                             return true
                     }
