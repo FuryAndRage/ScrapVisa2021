@@ -12,6 +12,10 @@
         }
     </style>
 {% endblock css %}
+
+{% block title %}
+    Resident Visa 2021
+{% endblock title %}
     
 {% block main %}
     <div class="container " id="app">
@@ -159,7 +163,7 @@
 
 {% block js %}
 <script>
-    const BASE_URL = '//localhost:5000';
+    const BASE_URL = '//localhost:8080';
     Vue.createApp({
         delimiters:["[[","]]"],
         data() {
