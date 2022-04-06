@@ -1,35 +1,28 @@
-{% extends 'base.html' %}
-
-{% block css %}
-    <style>
-        html{
-           scroll-behavior: smooth;
-        }
-        .bg-success-alt{
-            background-color: #3abab4;
-        }
-        .bg-info-alt{
-            background-color: #667eea;
-        }
-        .bg-danger-alt{
-            background-color:  #ed64a6;
-        }
-        .bg-purple-alt{
-            background-color: #9f7aea;
-        }
-        /* body{
-            background-image: url('https://source.unsplash.com/1600x900/?auckland');
-            background-size: cover;
-            background-repeat: no-repeat;
-        } */
-    </style>
-{% endblock css %}
-
-{% block title %}
-    Resident Visa 2021
-{% endblock title %}
-    
-{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="2021 Resident Visa Scraper"/>
+<meta name="Keywords" content="HTML, CSS, JavaScript, Python, Flask, Vuejs">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css" integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700;800&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K70TSM7S01');
+  </script>
+<title>2021 Resident Visa Scraper</title>
+</head>
+<body class="bg-dark">
     <div class="container " id="app">
         <div class="row justify-content-center">
             <div class="card my-5 bg-transparent shadow-none" >
@@ -39,99 +32,89 @@
                             <h1 class="m-0  fw-bold" style="font-size: 5em;" >2021 Resident Visa</h1>
                             <p class="" style="font-size: 1.3em;">Last update: {{context.last_update}}</p>
                         </div> 
-                        
                         <div class="row mt-5">
-                            
-                        <div class="col-lg-3 col-md-6 col-sm-12 ">
-                            <div class="small-box shadow  text-center bg-info-alt" >
-                                <div class="inner">
-                                    <h3 class="mt-2 fw-bold">{{context.total_applied}}</h3>
-                                    <p class="fw-bold fs-5">Total applications received</p>
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="small-box shadow  text-center bg-info-alt" >
+                                    <div class="inner">
+                                        <h3 class="mt-2 fw-bold">{{context.total_applied}}</h3>
+                                        <p class="fw-bold fs-5">Total applications received</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="small-box shadow text-center bg-success-alt ">
+                                    <div class="inner">
+                                        <h3 class="text-light mt-2 fw-bold">{{context.total_approved}}</h3>
+                                        <p class="text-light fw-bold fs-5">Applications approved </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 " >
+                                <div class="small-box shadow text-center bg-danger-alt">
+                                    <div class="inner" >
+                                        <h3 class="mt-2 fw-bold">{{context.percent_aproved}}<sup style="font-size: 20px">%</sup></h3>
+                                        <p class="fw-bold fs-5">Percentage of Approved Visas</p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="small-box shadow text-center bg-purple-alt">
+                                    <div class="inner">
+                                        <h3 class="mt-2 fw-bold">{{context.average_aproved}}</h3>
+                                        <p class="fw-bold fs-5">Average per week</p>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12 ">
-                            <div class="small-box shadow text-center bg-success-alt ">
-                                <div class="inner">
-                                    <h3 class="text-light mt-2 fw-bold">{{context.total_approved}}</h3>
-                                    <p class="text-light fw-bold fs-5">Applications approved </p>
+                        <div class="row my-5">
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="small-box shadow text-center bg-info-alt">
+                                    <div class="inner">
+                                        <h3 class="mt-2">{{context.people_included}}</h3>
+                                        <p class="fw-bold fs-5">Total of People Included</p>
+                                    </div>
+                                    
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12 " >
-                            <div class="small-box shadow text-center bg-danger-alt">
-                                <div class="inner" >
-                                    <h3 class="mt-2 fw-bold">{{context.percent_aproved}}<sup style="font-size: 20px">%</sup></h3>
-                                    <p class="fw-bold fs-5">Percentage of Approved Visas</p>
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="small-box shadow text-center bg-success-alt">
+                                    <div class="inner">
+                                        <h3 class="mt-2">{{context.people_approved}}</h3>
+                                        <p class="fw-bold fs-5">Total of People Approved</p>
+                                    </div>
+                                    
                                 </div>
-                                
                             </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12 ">
-                            <div class="small-box shadow text-center bg-purple-alt">
-                                <div class="inner">
-                                    <h3 class="mt-2 fw-bold">{{context.average_aproved}}</h3>
-                                    <p class="fw-bold fs-5">Average per week</p>
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row my-5">
-                        
-                        <div class="col-lg-3 col-md-6 col-sm-12 ">
-                            <div class="small-box shadow text-center bg-info-alt">
-                                <div class="inner">
-                                    <h3 class="mt-2">{{context.people_included}}</h3>
-                                    <p class="fw-bold fs-5">Total of People Included</p>
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12 ">
-                            <div class="small-box shadow text-center bg-success-alt">
-                                <div class="inner">
-                                    <h3 class="mt-2">{{context.people_approved}}</h3>
-                                    <p class="fw-bold fs-5">Total of People Approved</p>
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-12 ">
-                            <div class="small-box shadow text-center bg-danger-alt">
-                                <div class="inner">
-                                    <h3 class="mt-2">{{context.people_percent}}<sup style="font-size: 20px">%</sup></h3>
-                                    <p class="fw-bold fs-5">% of People Approved </p>
-                                </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="small-box shadow text-center bg-danger-alt">
+                                    <div class="inner">
+                                        <h3 class="mt-2">{{context.people_percent}}<sup style="font-size: 20px">%</sup></h3>
+                                        <p class="fw-bold fs-5">% of People Approved </p>
+                                    </div>
                                
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 ">
-                            <div class="small-box shadow text-center bg-purple-alt">
-                                <div class="inner">
-                                    <h3 class="mt-2">{{context.people_average}}</h3>
-                                    <p class="fw-bold fs-5">Average per week</p>
+                            <div class="col-lg-3 col-md-6 col-sm-12 ">
+                                <div class="small-box shadow text-center bg-purple-alt">
+                                    <div class="inner">
+                                        <h3 class="mt-2">{{context.people_average}}</h3>
+                                        <p class="fw-bold fs-5">Average per week</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="row  justify-content-center">
-                    <div class="col-lg-6 col-12">
-                    <div class="small-box shadow text-center bg-gray">
-                        <div class="inner">
-                            <h3 class="mt-2">{{context.time_process_total}} <span style="font-size: 0.8em;">Years</span></h3>
-                            <p class="fw-bold fs-5"><span class="fw-light">*</span> Estimated time to process all applications</p>
+                        <div class="row  justify-content-center">
+                            <div class="col-lg-6 col-12">
+                                <div class="small-box shadow text-center bg-gray">
+                                    <div class="inner">
+                                        <h3 class="mt-2">{{context.time_process_total}} <span style="font-size: 0.8em;">Years</span></h3>
+                                        <p class="fw-bold fs-5"><span class="fw-light">*</span> Estimated time to process all applications</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                    </div>
                     </div>
                     <div class="row justify-content-center">
                        <div class="col-12 text-center">
@@ -143,7 +126,6 @@
                 </div>
             </div>
         </div>
-     
        <div class="row my-5">
           <div class="card my-5">
               <div class="card-body">
@@ -174,50 +156,14 @@
               </div>
           </div>
        </div>
-
-    </div>
-
-{% endblock main %}
-
-
-{% block js %}
-<script>
-    const BASE_URL = '//scrap-visa-2021-hun7b.ondigitalocean.app';
-    // const BASE_URL = '//localhost:5000';
-
-    Vue.createApp({
-        delimiters:["[[","]]"],
-        data() {
-            return {
-                visaData:[],
-                
-            }
-        },
-        methods:{
-            getTableData(){
-                axios.get(`${BASE_URL}/api`).then(response =>{
-                    this.visaData = response.data;
-                    
-                }).catch(error =>{
-                    console.log(error);
-                
-                })
-            },
-            getArrows(data, index){
-                if(index < this.visaData.length - 1){
-                    if(parseInt(this.visaData[index][data]) > parseInt(this.visaData[index + 1][data])){
-                            return true
-                    }
-                }
-               
-            }
-        },
-        mounted(){
-            this.getTableData();
-         
-        }
-    }).mount('#app')
-  </script>
-{% endblock js %}
-    
-    
+    </div> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js" integrity="sha512-KBeR1NhClUySj9xBB0+KRqYLPkM6VvXiiWaSz/8LCQNdRpUm38SWUrj0ccNDNSkwCD9qPA4KobLliG26yPppJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/vue@3"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K70TSM7S01"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+{% block js %}{% endblock js %}
+</body>
+</html>
