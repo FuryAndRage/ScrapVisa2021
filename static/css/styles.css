@@ -1,0 +1,18 @@
+* {
+    font-family: 'Barlow Condensed', sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+ }
+ .bg-success-alt{
+     background-color: #3abab4;
+ }
+ .bg-info-alt{
+     background-color: #667eea;
+ }
+ .bg-danger-alt{
+     background-color:  #ed64a6;
+ }
+ .bg-purple-alt{
+     background-color: #9f7aea;
+ }
