@@ -14,6 +14,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700;800&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/slick-loader@1.1.20/slick-loader.min.css">
+<script src="https://unpkg.com/slick-loader@1.1.20/slick-loader.min.js"></script>	
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -105,7 +107,16 @@
                                 </div>
                             </div>
                         </div>
+                       
                         <div class="row  justify-content-center">
+                            <div class="col-lg-6 col-12">
+                                <div class="small-box shadow text-center bg-danger">
+                                    <div class="inner">
+                                        <h3 class="mt-2">{{context.total_declined}} <span style="font-size: 0.8em;">Declined</span></h3>
+                                        <p class="fw-bold fs-5"><span class="fw-light"></span> {{context.percent_declined}}% of Total applications </p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-12">
                                 <div class="small-box shadow text-center bg-gray">
                                     <div class="inner">
@@ -138,19 +149,41 @@
                                 <th class="text-center">Total number of people included</th>
                                 <th class="text-center" >Applications approved and visas issued</th>
                                 <th class="text-center">People approved and issued visas</th>
+                                <th class="text-center">Declined Failed Instructions</th>
                             </tr>
                         </thead>
                          <tbody>
-                             <tr v-for="(data, index) in visaData">
+                             <tr v-for="(data, index) in visaDataFiltered">
                                  <td class="text-center text-dark" >[[data.date]] </td>
                                  <td class="text-center text-dark">[[data.applications_received]] <span v-if="getArrows('applications_received',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span> </td>
                                  <td class="text-center text-dark">[[data.total_people_included]] <span v-if="getArrows('total_people_included',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span> </td>
                                  <td class="text-center text-dark">[[data.applications_approved]] <span v-if="getArrows('applications_approved',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span></td>
                                  <td class="text-center text-dark">[[data.people_approved]] <span v-if="getArrows('people_approved',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span></td>
+                                 <td class="text-center text-dark">[[data.declined]] <span v-if="getArrows('declined',index)" class="fas fa-arrow-up text-success" style="margin-left: .5em;"></span> <span v-else class="fas fa-arrow-down text-danger" style="margin-left: .5em;"></span></td>
                              </tr>
                          </tbody>
                     </table>
                 </div>
+                <!-- <div class="col-md-12 text-center">
+                    <nav aria-label="Page navigation example" class="text-center">
+                        <ul class="pagination pagination-lg  justify-content-center ">
+                            <li class="page-item">
+                            <a class="page-link text-white bg-dark border border-dark " href="#" aria-label="Previous" @click.prevent="movePageDown">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                            </li>
+                            <li  v-for="page in totalPages" class="page-item " :class="currentPage == page? 'active':''">
+                                <a class="page-link bg-light border border-dark " href="#" v-text="page"></a>
+                            </li>
+                           
+                            <li class="page-item">
+                            <a class="page-link text-white bg-dark border border-dark " href="#" aria-label="Next" @click.prevent="movePageUp">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> -->
                 <p class="text-dark">*Based on collected data so far</p>
                 <p class="text-dark">All data was collected from the <a href="https://www.immigration.govt.nz/new-zealand-visas/waiting-for-a-visa/how-long-it-takes-to-process-your-visa-application/2021-resident-visa-processing-times" target="_blank">New Zealand Immigration</a> website.</p>
               </div>
