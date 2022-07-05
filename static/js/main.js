@@ -1,5 +1,5 @@
-// const BASE_URL = '//scrap-visa-2021-hun7b.ondigitalocean.app';
-const BASE_URL = '//localhost:5000';
+const BASE_URL = '//scrap-visa-2021-hun7b.ondigitalocean.app';
+// const BASE_URL = '//localhost:5000';
 
 Vue.createApp({
     delimiters:["[[","]]"],
