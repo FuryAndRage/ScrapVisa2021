@@ -14,6 +14,9 @@ class Scraper:
         self.approved_percent = 0
         self.average_weekly_approved = 0
         self.approved = 0
+        self.declined = 0
+        self.total_declined = 0
+        self.declined_percentage = 0
 
         self.people_included = 0
         self.people_aproved = 0
@@ -38,6 +41,7 @@ class Scraper:
         p = [row.find_all('p') for row in data]
         last_update = p[2][0].text
         json_context = []
+        print(p[1][-1].text)
         for index,row in enumerate(p):
             if index > 1:
                 json_context.append({
@@ -45,14 +49,18 @@ class Scraper:
                     'applications_received': row[1].text.replace(',',''),
                     'total_people_included':row[2].text.replace(',',''),
                     'applications_approved':row[3].text.replace(',',''),
-                    'people_approved': row[4].text.replace(',','')
+                    'people_approved': row[4].text.replace(',',''),
+                    'declined': row[5].text.replace(',','')
                 })
                 self.total_received += int(str(row[1].text).replace(',',''))
                 self.approved += int(str(row[3].text).replace(',',''))
                 self.people_included += int(str(row[2].text).replace(',',''))
                 self.people_aproved += int(str(row[4].text).replace(',',''))
+            
 
         self.approved_percent = round(self.approved * 100 / self.total_received,2)
+        self.declined_percentage = round(float(p[1][-1].text) * 100 / self.total_received,2)
+        print(self.declined_percentage)
         self.average_weekly_approved = self.approved / len(p)-3
 
         self.people_aproved_percent = round(self.people_aproved * 100 / self.people_included, 2)
@@ -65,7 +73,9 @@ class Scraper:
             'total_applied':self.total_received,
             'percent_aproved': self.approved_percent,
             'average_aproved': round(self.average_weekly_approved,1),
-
+            'declined': self.declined,
+            'percent_declined': self.declined_percentage,
+            'total_declined': p[1][-1].text,
             'people_included': self.people_included,
             'people_approved':self.people_aproved,
             'people_percent' : self.people_aproved_percent,
