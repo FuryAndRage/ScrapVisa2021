@@ -38,19 +38,22 @@ class Scraper:
 
     def get_data_from_rows(self):
         data = self.get_table_data()
-        p = [row.find_all('p') for row in data]
+        p = [row.find_all('td') for row in data]
         last_update = p[2][0].text
         json_context = []
         print(p[1][-1].text)
         for index,row in enumerate(p):
+            
             if index > 1:
+                print(row[1])
+                # print(len(row))
                 json_context.append({
                     'date': row[0].text,
                     'applications_received': row[1].text.replace(',',''),
                     'total_people_included':row[2].text.replace(',',''),
                     'applications_approved':row[3].text.replace(',',''),
                     'people_approved': row[4].text.replace(',',''),
-                    'declined': row[5].text.replace(',','')
+                    'declined': row[-1].text.replace(',','')
                 })
                 self.total_received += int(str(row[1].text).replace(',',''))
                 self.approved += int(str(row[3].text).replace(',',''))
@@ -59,8 +62,7 @@ class Scraper:
             
 
         self.approved_percent = round(self.approved * 100 / self.total_received,2)
-        self.declined_percentage = round(float(p[1][-1].text) * 100 / self.total_received,2)
-        print(self.declined_percentage)
+        self.declined_percentage = round(float(p[1][-1].text) * 100 / self.approved,2)
         self.average_weekly_approved = self.approved / len(p)-3
 
         self.people_aproved_percent = round(self.people_aproved * 100 / self.people_included, 2)
